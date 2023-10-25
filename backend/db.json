@@ -1,0 +1,58 @@
+{
+  "pensamentos": [
+    {
+      "id": 1,
+      "conteudo": "Tu te tornas eternamente responsável por aquilo que cativas.",
+      "autoria": "Antoine de Saint-Exupéry",
+      "modelo": "modelo3"
+    },
+    {
+      "id": 2,
+      "conteudo": "Ser feliz sem motivo é a mais autêntica forma de felicidade.",
+      "autoria": "Carlos Drummond de Andrade",
+      "modelo": "modelo1"
+    },
+    {
+      "id": 3,
+      "conteudo": "Nunca deixe ninguém te dizer que não pode fazer alguma coisa. Se você tem um sonho tem que correr atrás dele. As pessoas não conseguem vencer e dizem que você também não vai vencer. Se você quer uma coisa corre atrás.",
+      "autoria": "À Procura da Felicidade",
+      "modelo": "modelo2"
+    },
+    {
+      "conteudo": "A alegria evita mil males e prolonga a vida.",
+      "autoria": "William Shakespeare",
+      "modelo": "modelo1",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "conteudo": "Deus nunca perturba a alegria dos seus filhos se não for para lhes preparar uma mais certa e maior.",
+      "autoria": "Alessandro Manzoni",
+      "modelo": "modelo2"
+    },
+    {
+      "conteudo": "O segredo da felicidade é o seguinte: deixar que os nossos interesses sejam tão amplos quanto possível, e deixar que as nossas reações em relação às coisas e às pessoas sejam tão amistosas quanto possam ser.",
+      "autoria": "Bertrand Russell",
+      "modelo": "modelo3",
+      "id": 6
+    },
+    {
+      "id": 7,
+      "conteudo": "A esperança é o sonho do homem acordado.",
+      "autoria": "Aristóteles",
+      "modelo": "modelo3"
+    },
+    {
+      "id": 8,
+      "conteudo": "Para conhecermos os amigos é necessário passar pelo sucesso e pela desgraça. No sucesso, verificamos a quantidade e, na desgraça, a qualidade.",
+      "autoria": "Confúcio",
+      "modelo": "modelo1"
+    },
+    {
+      "id": 9,
+      "conteudo": "Existe apenas um bem, o saber, e apenas um mal, a ignorância.",
+      "autoria": "Sócrates",
+      "modelo": "modelo2"
+    }
+  ]
+}

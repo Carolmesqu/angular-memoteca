@@ -1,0 +1,653 @@
+Cláudia está aplicando seus conhecimentos em Angular
+desenvolvendo um componente de perfil de usuário,
+onde deseja apresentar o nome e a foto de perfil
+do usuário. Com o uso do property binding, Cláudia
+testou algumas formas diferentes de mostrar esses
+dados, mas uma não está correta.
+
+@Component({
+  selector: 'app-perfil',
+  templateUrl: './perfil.component.html',
+  styles: []
+})
+export class PerfilComponent {
+  usuario = {
+    nome: 'Cláudia Ohio',
+    imgPerfil: './assets/foto-1445.jpg'
+  }
+}
+
+<div class="card-perfil">
+    <p>{{usuario.nome}}</p>
+    <img src="{{usuario.imgPerfil}}" alt="Imagem de perfil">
+</div>
+
+A interpolação é a incorporação de expressões em
+texto com o uso de chaves duplas como delimitadores.
+
+<div class="card-perfil">
+    <p [textContent]="usuario.nome"></p>
+    <img [src]="usuario.imgPerfil" alt="Imagem de perfil">
+</div>
+
+A vinculação de propriedades ajuda a definir o valor de uma
+propriedade criada dentro do componente para uma propriedade
+de um elemento HTML. para isso basta colocar a propriedade
+entre colchetes e passar como valor a propriedade do
+componente.
+
+-------------------------------//-------------------------------
+
+Nesta aula vimos como podemos fazer a comunicação de dados
+entre template e componente com auxílio do data binding,
+os diferentes tipos e quais os recursos necessários para
+usá-los.
+
+Das afirmações abaixo, assinale as que são verdadeiras.
+
+Ao usar {{ pensamento.conteudo }}, o Angular insere o valor
+do atributo do componente no template.
+
+
+A interpolação permite a visualização do valor de uma
+propriedade do componente no template com o uso de chaves
+duplas. {{ nome-da-propriedade }}.
+
+Para enviar informação do typescript para o template,
+utilizamos colchetes na propriedade da tag html, como
+no exemplo: [src]=”imagem”.
+
+
+O property binding funciona no mesmo sentido da
+interpolação, unidirecional, vindo a informação do
+componente para o template. É representado pelo uso
+de colchetes em atributos de elementos HTML.
+
+Two-way data binding mantém a informação atualizada nas
+duas pontas da comunicação.
+
+
+Este binding combina o recurso do property binding e o
+event binding em uma única notação usando a diretiva
+ngModel.[(ngModel)]=”nome-da-propriedade”.
+
+-------------------------------//-------------------------------
+
+Criar componente de formulário para adicionar novos
+pensamentos;
+
+Passar valores de uma propriedade do component para atributos
+de tag dentro do template com o uso de property binding;
+Mostrar valores de propriedades do component no template por
+meio da interpolação;
+
+Escutar eventos do template e fazer a chamada de métodos no
+component com o event binding;
+
+Usar a diretiva ngModel que pertence ao FormsModule para a
+comunicação bidirecional entre component e template;
+
+Como funcionam os diferentes tipos de comunicação entre
+component e template.
+
+-------------------------------//-------------------------------
+
+No projeto construímos as rotas para os componentes de
+formulário e lista de pensamento, estas rotas quando
+solicitadas devem ser renderizadas no corpo da diretiva
+<router-outlet>.
+
+Agariberto está construindo a aplicação conosco, mas ao
+finalizar a construção do botão e testá-lo percebeu que a
+página inteira está sendo recarregada, aspecto que devemos
+evitar em uma Single Page Application. Veja as configurações
+de roteamento de Agariberto.
+
+const routes: Routes = [
+  { path: "", redirectTo: "listarPensamento", pathMatch: "full" },
+  { path: "criarPensamento", component: CriarPensamentoComponent },
+  { path: "listarPensamento", component: ListarPensamentoComponent },
+];
+
+E o botão que criou:
+
+<button class="botao" href="/criarPensamento">
+        Adicionar pensamento
+</button>
+
+O que fazer para que carregue apenas o componente quando
+clicar no botão?
+
+O atributo href deve ser trocado pelo routerLink tendo como
+valor o nome do componente igual ao declarado no objeto
+de rota.
+
+
+O routerLink inicia a navegação do componente, que será
+renderizado na diretiva <router-outlet>.
+
+-------------------------------//-------------------------------
+
+O RouterModule é um módulo do Angular que permite definir
+rotas na sua aplicação, diferentes estratégias de
+correspondência de caminho, fácil acesso aos parâmetros
+de rota e proteções de rota para proteger os componentes
+contra acesso não autorizado.
+
+Na aula vimos a diretiva <router-outlet> que é responsável
+por renderizar a rota solicitada pelo usuário e por meio da
+propriedade routerLink podemos passar para um botão ou ancora
+o componente que será renderizado a partir dele.
+
+No projeto da aula não teremos, mas imagine que você esteja
+construindo uma página que possui um menu com links que
+redireciona para alguns componentes desta página, como no
+exemplo:
+
+Perceba que a página /home é apresentada, mas na barra de
+menu nada indica que está nessa página. Se você conhece
+um pouco de Javascript talvez pode ter pensado em um evento
+de click e adicionar uma classe, mas isso daria muito
+trabalho. O RouterModule possui a propriedade
+routerLinkActive que é necessário apenas passar a classe
+com o estilo que será aplicado no link.
+
+app.component.html
+
+<nav class="navbar container full-width d-flex">
+    <ul class="d-flex  links">
+        <li
+            routerLink="/first"
+            routerLinkActive="active"
+            class="links-nav py-1"><a>First</a>
+        </li>
+        <li
+            routerLink="/second"
+            routerLinkActive="active"
+            class="links-nav py-1"><a>Second</a>
+        </li>
+    </ul>
+    <img
+        class="logo"
+        routerLink="/home"
+        routerLinkActive="active"
+        src="./assets/LogoAlurabranco.png" alt="">
+</nav>
+
+<main class="container m-width py-3">
+    <router-outlet></router-outlet>
+</main>
+
+app.component.css
+
+.active{
+    border-bottom: 5px solid white;
+    color: white;
+    transition: 300ms ease-in;
+}
+.logo.active {
+    padding-bottom: 13px;
+}
+
+-------------------------------//-------------------------------
+
+Utilizar o RouterModule;
+
+Utilizar a diretiva <router-outlet>;
+
+Criar e configurar rotas;
+
+Navegar por meio da propriedade routerLink.
+
+-------------------------------//-------------------------------
+
+As diretivas são como atributos em um elemento DOM que
+informa o Angular para que adicione algum comportamento a
+este elemento. Sobre as diretivas que conheceu nesta aula,
+marque as afirmativas corretas.
+
+Para utilizar o ngClass com expressão basta informar a classe
+seguida da expressão que retorne valor booleano.
+
+É isso aí. Caso a expressão retorne true a classe declarada
+é aplicada, como no exemplo. A propriedade active vai ser
+alterada para o valor contrário ao atual, se for true muda
+para false e vice versa:
+
+@Component({
+  selector: 'app-home',
+  template: `
+    <div>
+      <h1 [ngClass]="{'color-blue': active}">
+        Home!
+      </h1>
+      <button (click)="colorBlue()">
+          Mudar cor
+      </button>
+    </div>
+  `,
+  styles: [
+  ]
+})
+export class HomeComponent {
+  active: boolean = true;
+
+  constructor() { }
+
+  colorBlue(){
+    this.active = !this.active
+  }
+}
+
+A diretiva “*ngIf” é responsável por incluir ou
+excluir um elemento do template.
+
+Isso aí. O elemento que recebeu a diretiva, caso a
+condicional for verdadeira, irá incluir o elemento
+no template, caso contrário, ele poderá excluir o
+elemento ou incluir um elemento declarado usando
+o elemento do Angular <ng-template>.
+
+O “*ngFor” permite percorrer um array e exibir
+cada item como elemento no template.
+
+A sintaxe é composta por uma variável local
+que recebe o valor de cada item percorrido
+seguido de qual será o array ou objeto
+iterável.
+
+<div *ngFor="let pensamento of listaPensamento">
+
+-------------------------------//-------------------------------
+
+Diretivas de componentes: usado com um modelo.
+Esse tipo de diretiva é a mais comum.
+Ex: <app-listarPensamentos>.
+
+Diretivas estruturais: altera o layout do DOM adicionando
+e removendo elementos DOM.
+Ex: NgIf, NgFor. NgSwitch.
+
+Diretivas de atributos: altera a aparência ou o comportamento
+de um elemento, componente ou outra diretiva.
+Ex: NgClass, NgStyle.
+
+-------------------------------//-------------------------------
+
+Tipos diferentes de diretivas;
+Utilizar diretivas estruturais incluindo e excluindo elementos
+com ngFor e ngIf;
+Utilizar expressões para estilizar elementos com ngClass.
+
+-------------------------------//-------------------------------
+
+O uso de Services em Angular traz mais organização para a
+aplicação e permite um melhor gerenciamento das informações.
+Com base no que vimos sobre Services e Injeção de dependência,
+marque as afirmações corretas.
+
+O decorador @Injectable informa ao Angular que essa classe é
+injetável e com o metadado providedIn como root torna esse
+serviço visível em toda aplicação.
+
+O metadado providedIn: 'root', indica que o Angular deve
+fornecer o serviço no injetor raiz.
+
+O Objetivo de um serviço é organizar e compartilhar regras de
+negócios, dados e métodos para diferentes componentes de uma
+aplicação por meio da injeção de dependência.
+
+Serviço em Angular são classes com o decorador @Injectable
+que informa ao Angular que pode ser injetado em componentes
+da aplicação.
+
+-------------------------------//-------------------------------
+
+Utilizar o JSON-Server simulando uma API REST;
+Criar uma interface para definir tipos personalizados;
+Entender a importância do Service e o novo decorator
+@Injectable();
+Injetar dependências.
+
+-------------------------------//-------------------------------
+
+Ao fazer requisições o HttpClient retorna observable da chamada
+desses métodos. O Observable é utilizado internamente pelo
+framework e já é instalado quando você cria uma nova aplicação
+Angular e é uma funcionalidade da biblioteca RXJS. Sobre o
+Observable marque as afirmativas corretas.
+
+Um Observable pode ser acessado em várias partes da aplicação,
+basta se inscrever.
+
+O .subscribe nos permite 3 tipos de interações com esse
+Observable, caso tenha sucesso, emitir erro e ao completar.
+
+É capaz de lidar com transferências de dados assíncrona.
+
+O Observable atua como observador de um item e sempre que
+houver mudança ele emite uma notificação, com isso executamos
+alguma ação.
+
+-------------------------------//-------------------------------
+
+Nesta aula finalizamos nossa aplicação com um CRUD com auxílio
+da classe HttpClient. Mostre o que aprendeu marcando as
+afirmações corretas.
+
+O método GET deve receber como parâmetro a URL da API.
+
+
+O GET precisa receber a URL como parâmetro para trazer os
+dados para a aplicação.
+
+Alternativa correta
+O HttpClient retorna Observable das chamadas de métodos HTTP,
+o que facilita na implementação de regras em caso de sucesso,
+erro e conclusão da requisição.
+
+
+HttpClient é uma classe que possui envia requisições HTTP e
+permite interagir com os suas diferentes possibilidades de
+resultados.
+
+-------------------------------//-------------------------------
+
+Utilizar métodos de requisição HTTP com serviço HttpClient;
+Utilizar o Observable no retorno dos métodos HTTP;
+Capturar parâmetros em rotas;
+Criar um CRUD.
+
+-------------------------------//-------------------------------
+
+No angular, existe mais de uma forma de criar formulários
+reativos. Você pode criar um novo formulário, atribuindo
+a ele uma nova instância da classe FormGroup e, para cada
+input, uma instância da classe FormControl. Assim:
+
+ngOnInit(): void {
+    this.formulario = new FormGroup({
+      conteudo: new FormControl(''),
+      autoria: new FormControl(''),
+      modelo: new FormControl('')
+    })
+  }
+
+No lugar de instanciar um FormGroup e um FormControl
+para cada campo do formulário, você pode utilizar o
+construtor de formulários do angular, o FormBuilder
+e utilizar uma sintaxe simplificada, como visto na
+aula. Por “debaixo dos panos”, o FormBuilder vai
+atribuir os controles aos campos, sem precisarmos
+nos preocupar com isso.
+
+ngOnInit(): void {
+    this.formulario = this.formBuilder.group({
+      conteudo: [''],
+      autoria: [''],
+      modelo: ['']
+    })
+  }
+
+É importante ressaltar que as duas formas estão corretas
+e podem ser utilizadas de acordo com a preferência da
+pessoa desenvolvedora. E aí, qual você prefere?
+
+-------------------------------//-------------------------------
+
+Para acessar todo o poder dos formulários reativos em Angular,
+é necessário além da criação do formulário no componente,
+fazer a ligação entre ele e o form que está no template.
+Para isso, é necessário seguir alguns passos importantes.
+Assinale a alternativa que mostra os passos necessários
+para fazer a associação do formulário e dos campos
+entre component e template.
+
+Na tag <form> do html, é necessário fazer um property binding
+por meio da diretiva formGroup e atribuir a ela o valor da
+propriedade formulario, criada na classe typescript. Além disso,
+é necessário incluir em cada input a propriedade
+formControlName, com o nome declarado na classe.
+
+<form [formGroup]="formulario">
+
+formControlName="conteudo"
+
+formControlName="autoria"
+
+formControlName="modelo"
+
+O FormGroup representa um grupo de dados no formulário.
+Você pode ter vários grupos em um único formulário, o que
+facilita e organiza o controle dos dados.
+
+O FormControlName é uma diretiva que sincroniza os
+controles em um formGroup através da sincronização por
+meio do nome da propriedade do formGroup, como fiz com
+o conteúdo, autoria e modelo.
+
+-------------------------------//-------------------------------
+
+Podemos utilizar a interpolação para acessar no html os
+valores das propriedades declaradas na classe typescript.
+Agora, esses valores estão dentro do formulário e não mais
+no objeto ‘pensamento’, como anteriormente. Qual método você
+usaria para renderizar o conteúdo do pensamento?
+
+<p>{{ formulario.get('conteudo')?.value }}</p>
+
+Em um formulário reativo, você sempre pode acessar qualquer
+controle de formulário através do método get, passando para
+ele o campo e a propriedade que deseja acessar. Como
+queremos o valor do campo, devemos passar a propriedade
+value.
+
+-------------------------------//-------------------------------
+
+Criar um formulário reativo através da classe FormBuilder;
+Associar o formulário criado no component ao template através
+da diretiva formGroup;
+Utilizar a diretiva formControlName para associar os inputs do
+formulário;
+Acessar os valores dos campos do formulário no template com o
+método get.
+
+-------------------------------//-------------------------------
+
+Os “validators” ou validadores, são mais uma facilidade que
+o Angular traz no pacote @angular/forms. Essa classe já traz
+inúmeros tipos de validações prontas para serem utilizadas.
+É incrível como isso facilita o desenvolvimento. Um validador
+é uma função que processa uma coleção de controles e retorna
+um erro ou nulo (o retorno nulo significa que a validação foi
+aprovada).
+
+Você conheceu na aula, o Validators.required(),
+Validators.minLenght(), Validators.pattern() e o
+Validators.compose(), mas existem diversos outros tipos de
+validação presentes na classe Validators. Conheça:
+
+Validators.min()
+
+Validador que exige que o valor do controle seja maior
+ou igual ao número fornecido.
+Validators.max()
+
+Validador que exige que o valor do controle seja menor
+ou igual ao número fornecido.
+Validators.requiredTrue()
+
+Validador que exige que o valor do controle seja verdadeiro.
+Este validador é comumente usado para caixas de seleção
+obrigatórias.
+Validators.email()
+
+Validador que exige que o valor do controle passe em um
+teste de validação de email.
+Validators.maxLength()
+
+Validador que exige que o comprimento do valor do controle
+seja menor ou igual ao tamanho máximo fornecido.
+Validators.nullValidator()
+
+Validador de valores nulos.
+Validators.composeAsync()
+
+Compõe vários validadores assíncronos em uma única função
+que retorna a união dos objetos de erro individuais para
+o controle fornecido.
+Na documentação do Angular, você pode encontrar mais
+detalhes sobre a classe Validators.
+
+https://angular.io/api/forms/Validators#description
+
+-------------------------------//-------------------------------
+
+Trabalhando como pessoa desenvolvedora, foi apresentada a
+você a seguinte situação: a tela de cadastro de uma aplicação
+Angular contém um formulário reativo onde foram implementadas
+validações e também mensagens de erro informativas. Porém,
+essas mensagens estão aparecendo logo no carregamento inicial,
+no primeiro contato da pessoa usuária com o sistema, o que
+pode causar certa estranheza.
+
+Foi solicitado a você que essas mensagens de erro apareçam
+apenas quando necessário. Considerando apenas o campo “nome”,
+selecione a alternativa que mostra como deve ficar o código
+para que a mensagem de erro seja exibida apenas após o campo
+ter sido acessado.
+
+Código atual do html:
+
+<div class="mensagem__erro"
+     *ngIf="formulario.get('nome')?.errors”>
+      Nome obrigatório
+</div>
+
+<div class="mensagem__erro"
+     *ngIf="formulario.get('nome')?.errors && formulario.get('nome')?.touched">
+      Nome obrigatório
+</div>
+
+A propriedade touched informa se o controle foi tocado, o
+que significa que o usuário disparou um evento blur nele
+(evento que é acionado quando um elemento perde foco).
+Nesse caso, o erro não aparece logo de início, apenas se a
+pessoa acessar o campo e sair dele sem preenchê-lo.
+
+-------------------------------//-------------------------------
+
+Implementar validações nos campos do formulário através da
+classe Validators;
+Identificar os tipos de erros que ocorreram nas validações;
+Exibir mensagens de erro customizadas;
+Mostrar mensagens de erro apenas quando o campo for
+acessado;
+Habilitar/desabilitar o botão de salvar de acordo com o
+status do formulário.
+
+-------------------------------//-------------------------------
+
+A classe HttpParams representa um corpo de requisição/resposta
+HTTP com parâmetros serializados.
+
+Esta classe é imutável, ou seja, todas as operações de mutação
+retornam uma nova instância. O método ‘set’ que utilizamos,
+serve para substituir o valor de um parâmetro. É enviado o
+nome do parâmetro e o seu valor e é retornado um novo corpo
+com um novo valor.
+
+Conheça os outros métodos do HttpParams:
+
+    HttpParams.has()
+        Informa se o corpo inclui um ou mais valores para
+        um determinado parâmetro.
+
+    HttpParams.get()
+        Recupera o primeiro valor de um parâmetro.
+
+    HttpParams.getAll()
+        Recupera todos os valores de um parâmetro.
+
+    HttpParams.keys()
+        Recupera todos os parâmetros para este corpo da
+        requisição.
+
+    HttpParams.append()
+        Acrescenta um novo valor aos valores existentes
+        para um parâmetro.
+
+    HttpParams.appendAll()
+        Constrói um novo corpo com valores anexados para o
+        nome do parâmetro fornecido.
+
+    HttpParams.delete()
+        Remove um determinado valor ou todos os valores
+        de um parâmetro.
+
+    HttpParams.toString()
+        Serializa o corpo da requisição em uma string
+        codificada, em que os pares de chave-valor
+        (separados por =) são separados por & s.
+
+https://angular.io/api/common/http/HttpParams
+
+-------------------------------//-------------------------------
+
+Podemos passar parâmetros na requisição concatenando os
+valores na url. Porém, essa não é uma boa prática. O Angular
+fornece uma forma melhor, mais segura e elegante para fazer
+isso através da classe HttpParams. Antes de conhecer essa
+classe, você criou o seguinte método no service para listar
+os pensamentos:
+
+pensamento.service.ts
+
+
+//código omitido
+
+export class PensamentoService {
+  private readonly API = 'http://localhost:3000/pensamentos'
+  constructor(private http: HttpClient) { }
+
+  listar(pagina: number): Observable<Pensamento[]> {
+    const itensPorPagina: number = 6;
+    return this.http.get<Pensamento[]>(this.API +
+    `?_page=${pagina}&_limit=${itensPorPagina}`);
+ }
+
+//código restante
+
+Marque a alternativa que apresenta uma refatoração
+correta do código utilizando o HttpParams.
+
+//código omitido
+
+export class PensamentoService {
+  private readonly API = 'http://localhost:3000/pensamentos'
+  constructor(private http: HttpClient) { }
+
+  listar(pagina: number): Observable<Pensamento[]> {
+    const itensPorPagina: number = 6;
+    let params = new HttpParams()
+      .set("_page", pagina)
+      .set("_limit", itensPorPagina)
+   return this.http.get<Pensamento[]>(this.API, {params});
+  }
+
+//código restante
+
+É possível refatorar criando uma nova instância da classe
+HttpParams e utilizando o método set, para substituir o
+valor dos parâmetros ‘pagina’ e ‘itensPorPagina’, enviando
+o nome do parâmetro e o seu valor. Na requisição, é passado
+um objeto com todos os parâmetros.
+
+-------------------------------//-------------------------------
+
+Utilizar o HttpParams para enviar parâmetros na url;
+Implementar paginação dos dados;
+Criar um componente botão para carregar os pensamentos sob demanda;
+Realizar a comunicação entre componentes.
+
+-------------------------------//-------------------------------
