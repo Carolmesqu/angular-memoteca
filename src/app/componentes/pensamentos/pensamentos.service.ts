@@ -12,11 +12,15 @@ export class PensamentosService {
 
   constructor(private http: HttpClient) { }
 
-  listar(pagina: number): Observable<Pensamento[]> {
+  listar(pagina: number, filtro: string): Observable<Pensamento[]> {
 
     const itensPorPagina = 6;
     //Essa classe é imutavel, toda operação de mudança retorna uma nova instancia, vamos utilizado o metodo set serve para substituir um valor, passamos o parametro e o valor
     let params = new HttpParams().set("_page", pagina).set("_limit", itensPorPagina);
+
+    if(filtro.trim().length > 2 ) {
+      params = params.set("q", filtro);
+    }
 
     //GET /posts?_page=7&_limit=20
     // return this.http.get<Pensamento[]>(`${this.API}?_page=${pagina}&_limit=${itensPorPagina}`);

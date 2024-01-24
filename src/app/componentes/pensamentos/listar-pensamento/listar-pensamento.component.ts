@@ -39,18 +39,26 @@ export class ListarPensamentoComponent {
   ) {}
 
   ngOnInit(): void {
-    this.service.listar(this.paginaAtual).subscribe((listaPensamentos) => {
+    this.service.listar(this.paginaAtual, this.filtro).subscribe((listaPensamentos) => {
       this.listaPensamentos = listaPensamentos;
     });
   }
 
   carregarMaisPensamentos() {
-    this.service.listar(++this.paginaAtual).subscribe(listaPensamentos => {
+    this.service.listar(++this.paginaAtual, this.filtro).subscribe(listaPensamentos => {
       this.listaPensamentos.push(...listaPensamentos);
       if(!this.listaPensamentos.length) {
         this.haMaisPensamentos = false;
       }
       //Fizemos essa logica para acessar os pensamentos que foram acrescidos a cada página
+    })
+  }
+
+  pesquisarPensamentos() {
+    this.haMaisPensamentos = true;
+    this.paginaAtual = 1;
+    this.service.listar(this.paginaAtual, this.filtro).subscribe(listaPensamentos => {
+      this.listaPensamentos = listaPensamentos;
     })
   }
 }
