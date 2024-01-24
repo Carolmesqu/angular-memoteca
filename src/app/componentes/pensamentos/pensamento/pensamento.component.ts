@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Pensamento } from '../pensamento';
+import { PensamentosService } from '../pensamentos.service';
 
 @Component({
   selector: 'app-pensamento',
@@ -18,7 +19,9 @@ export class PensamentoComponent {
     favorito: false
   }
 
-  constructor() {}
+  constructor(
+    private service: PensamentosService
+  ) {}
 
   ngOnInit(): void {
 
@@ -41,5 +44,9 @@ export class PensamentoComponent {
       return 'inativo'
     }
     return 'ativo'
-  }  
+  }
+
+  atualizarFavoritos() {
+    this.service.mudarFavorito(this.pensamento).subscribe();
+  }
 }

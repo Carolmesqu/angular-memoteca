@@ -676,6 +676,81 @@ o filtro é digitado.
 
 -------------------------------//-------------------------------
 
+Para implementar a funcionalidade de favoritar um pensamento, 
+o primeiro passo foi renderizar no card de pensamento apenas 
+um ícone de coração que estivesse preenchido ou não de acordo 
+com o status da propriedade ‘favorito’ que se encontrava na 
+classe typescript. Para resolver essa questão, poderíamos 
+utilizar várias abordagens. Assinale as alternativas que
+mostram de forma correta como manipular fluxo de dados entre 
+template e component.
+
+Selecione duas alternativas:
+
+<button class="botao-favorito">
+      <img *ngIf="!pensamento.favorito"
+            src="/assets/imagens/icone-favorito-inativo.png"
+            alt="Ícone de favorito inativo">
+      <img *ngIf="pensamento.favorito"
+            src="/assets/imagens/icone-favorito-ativo.png"
+            alt="Ícone de favorito ativo">
+</button>
+
+Inserimos as imagens contendo os ícones dentro da tag button e 
+utilizamos a diretiva ngIf para renderizar os ícones de forma 
+condicional. 
+
+pensamento.component.html
+
+<button class="botao-favorito" >
+      <img
+        src="/assets/imagens/icone-favorito-{{ mudaFavorito() }}.png"
+        alt="Ícone de favorito {{ mudaFavorito() }}">
+</button>
+pensamento.component.ts
+
+mudaFavorito() {
+    if (this.pensamento.favorito == false) {
+      return 'inativo'
+    }
+    return 'ativo'
+  }
+
+Isso mesmo! Além de propriedades, podemos passar expressões 
+e chamadas de métodos dentro da interpolação. Assim, conseguimos 
+associar o valor da propriedade booleana ‘favorito’ ao nome do 
+ícone ‘ativo ou inativo’, renderizando o ícone correto e 
+tornando o texto alternativo mais acessível também.
+
+-------------------------------//-------------------------------
+
+Para implementar a funcionalidade de ‘favoritar’ um pensamento, 
+foi preciso adicionar comportamento ao botão e atualizar o 
+objeto ‘pensamento’ na API. Para isso, foi criada no service 
+uma função que faz uma requisição ao backend. Qual função 
+contém o método HTTP que pode ser utilizado para fazer essa 
+atualização?
+
+mudarFavorito(pensamento: Pensamento): Observable<Pensamento> {
+    //código omitido
+
+    return this.http.put<Pensamento>(url, pensamento )
+  }
+
+O método put() constrói um observable que, quando inscrito, 
+faz com que a solicitação configurada seja executada no 
+servidor. Esse método substitui um recurso existente por um 
+novo conjunto de valores e por isso, utilizamos o put quando 
+queremos atualizar um pensamento.
+
+-------------------------------//-------------------------------
+
+Renderizar condicionalmente o ícone de favorito;
+Utilizar chamadas de métodos dentro da interpolação;
+Implementar a funcionalidade de ‘favoritar’ um pensamento.
+
+-------------------------------//-------------------------------
+
 
 
 -------------------------------//-------------------------------
