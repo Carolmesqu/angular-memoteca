@@ -14,7 +14,8 @@ export class PensamentoComponent {
     id: 0,
     conteudo: 'I love Angular Cli',
     autoria: 'Pain Nagato',
-    modelo: 'modelo3'
+    modelo: 'modelo3',
+    favorito: false
   }
 
   constructor() {}
@@ -35,4 +36,10 @@ export class PensamentoComponent {
     return 'pensamento-p'
   }
 
+  mudarIconeFavorito(): string {
+    if(this.pensamento.favorito == false) {
+      return 'inativo'
+    }
+    return 'ativo'
+  }  
 }

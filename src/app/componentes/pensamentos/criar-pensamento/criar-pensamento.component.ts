@@ -13,7 +13,8 @@ export class CriarPensamentoComponent implements OnInit {
   pensamento: Pensamento = {
     conteudo: '',
     autoria: '',
-    modelo: ''
+    modelo: '',
+    favorito: false
   }
 
   constructor(

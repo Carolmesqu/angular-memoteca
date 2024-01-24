@@ -54,5 +54,4 @@ export class PensamentosComponent {
       return 'botao__desabilitado'
     }
   }
-
 }

@@ -651,3 +651,31 @@ Criar um componente botão para carregar os pensamentos sob demanda;
 Realizar a comunicação entre componentes.
 
 -------------------------------//-------------------------------
+
+Podemos associar a ação de filtrar os pensamentos a um botão 
+pesquisar. Porém, como não implementamos esse botão, associamos 
+essa ação a um evento no campo de filtro, para que disparasse 
+a busca. Assinale a alternativa correta quanto ao evento 
+utilizado:
+
+Utilizamos o evento keyup e associamos ao evento de pesquisar 
+pensamentos através de um event binding.
+
+(keyup)="pesquisarPensamentos()"
+
+O evento keyup ocorre quando a pessoa libera uma tecla no 
+teclado. Assim, a busca será dinâmica e os cards de pensamentos 
+já serão mostrados de acordo com o conteúdo digitado.
+
+-------------------------------//-------------------------------
+
+Criar um campo de busca;
+Implementar a funcionalidade de filtrar pensamentos;
+Mostrar pensamentos filtrados dinamicamente à medida que 
+o filtro é digitado.
+
+-------------------------------//-------------------------------
+
+
+
+-------------------------------//-------------------------------
