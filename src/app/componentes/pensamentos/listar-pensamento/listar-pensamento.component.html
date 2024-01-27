@@ -1,11 +1,5 @@
 <section class="container">
   <header class="header d-flex">
-    <h2 class="ff-inter">Meu mural</h2>
-    <div class="botoes">
-      <button class="botao" (click)="recarregarComponente()">Meu mural</button>
-      <button class="botao" (click)="listarFavoritos()">Meu favoritos</button>
-      <button routerLink="/criarPensamento" class="botao">Novo pensamento</button>
-    </div>
     <div class="buscar-pensamentos">
       <input 
       type="search" 
@@ -17,7 +11,13 @@
       >
       <img src="/assets/imagens/lupa.png" alt="Lupa azul">
     </div>
-    <button routerLink="/criarPensamento" class="botao">Adicionar pensamento</button>
+    <h2 class="ff-inter">{{ titulo }}</h2>
+    <div class="botoes">
+      <button class="botao" (click)="recarregarComponente()">Meu mural</button>
+      <button class="botao" (click)="listarFavoritos()">Meu favoritos</button>
+      <button routerLink="/criarPensamento" class="botao">Novo pensamento</button>
+    </div>
+    <!-- <button routerLink="/criarPensamento" class="botao">Adicionar pensamento</button> -->
   </header>
   <div class="mural" *ngIf="listaPensamentos.length > 0, else semPensamentos">
     <!-- Componente pai do app-pensamento -->

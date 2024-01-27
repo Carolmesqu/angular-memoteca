@@ -3,7 +3,7 @@ import { ExcluirPensamentoComponent } from './componentes/pensamentos/excluir-pe
 import { ListarPensamentoComponent } from './componentes/pensamentos/listar-pensamento/listar-pensamento.component';
 import { PensamentosComponent } from './componentes/pensamentos/pensamentos.component';
 import { RouteReuseStrategy } from '@angular/router';
-import { CustomReuseStrategy } from './custom-reuse-strategy'
+import * as customReuseStrategy from './custom-reuse-strategy'
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -40,7 +40,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule],
   providers: [
-    {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
+    {provide: RouteReuseStrategy, useClass: customReuseStrategy.CustomReuseStrategy}
   ],
  })
 export class AppRoutingModule { }
