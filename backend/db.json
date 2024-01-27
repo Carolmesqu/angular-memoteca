@@ -12,7 +12,7 @@
       "conteudo": "Ser feliz sem motivo é a mais autêntica forma de felicidade.",
       "autoria": "Carlos Drummond de Andrade",
       "modelo": "modelo1",
-      "favorito": false
+      "favorito": true
     },
     {
       "id": 3,
@@ -54,7 +54,7 @@
       "conteudo": "Para conhecermos os amigos é necessário passar pelo sucesso e pela desgraça. No sucesso, verificamos a quantidade e, na desgraça, a qualidade.",
       "autoria": "Confúcio",
       "modelo": "modelo1",
-      "favorito": true
+      "favorito": false
     },
     {
       "id": 9,

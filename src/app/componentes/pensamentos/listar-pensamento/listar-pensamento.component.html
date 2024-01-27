@@ -23,7 +23,10 @@
     <!-- Componente pai do app-pensamento -->
     <div *ngFor="let item of listaPensamentos">
       <!-- Para inserirmos informção do componente filho, utilizamos o property-binding -->
-      <app-pensamento [pensamento]="item"></app-pensamento>
+      <app-pensamento 
+        [pensamento]="item"
+        [listaFavoritos]="listaFavoritos"
+      ></app-pensamento>
     </div>
   </div>
 </section>
