@@ -1,6 +1,7 @@
 import { PensamentosService } from './../pensamentos.service';
 import { Component } from '@angular/core';
 import { Pensamento } from '../pensamento';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-pensamento',
@@ -37,7 +38,8 @@ export class ListarPensamentoComponent {
   listaFavoritos: Pensamento[] = [];
 
   constructor(
-    private service: PensamentosService
+    private service: PensamentosService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -73,5 +75,13 @@ export class ListarPensamentoComponent {
       this.listaFavoritos = listaPensamentosFavoritos;
 
     });
+  }
+
+  recarregarComponente() {
+    this.favoritos = false;
+    this.paginaAtual = 1;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([this.router.url]);
   }
 }
