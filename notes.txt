@@ -751,6 +751,154 @@ Implementar a funcionalidade de ‘favoritar’ um pensamento.
 
 -------------------------------//-------------------------------
 
+Olá estudante!
 
+Recomendamos que sempre utilize a mesma versão mostrada em vídeo 
+para evitar problemas de compatibilidade e comportamentos diferentes, 
+então caso esteja utilizando a mesma versão que a pessoa instrutora, 
+não precisa fazer os passos a seguir e pode seguir normalmente o curso.
+
+Mas se estiver usando uma versão posterior à utilizada no curso, 
+ou seja, uma versão acima da 14, atenção:
+
+No vídeo anterior, mostrei dois métodos do serviço Router do angular 
+que foram depreciados após a publicação do curso: onSameUrlNavigation 
+e routeReuseStrategy.
+
+Se no seu código esses métodos aparecerem com um aviso de "deprecated", 
+você pode fazer as alterações sugeridas nesse passo a passo para 
+refatorar o projeto e deixá-lo com o mesmo comportamento, mas sem os 
+métodos depreciados, certo?
+
+Vamos lá!
+
+Agora, a nova estratégia recomendada para reutilização de rotas é 
+o RouteReuseStrategy baseado em módulo. Para usá-lo, você precisará 
+implementar sua própria estratégia de reutilização de rotas personalizada.
+
+Passo 1
+
+Remova as linhas contendo
+
+this.router.onSameUrlNavigation = 'reload'
+COPIAR CÓDIGO
+e
+
+this.router.routeReuseStrategy.shouldReuseRoute = () => false
+COPIAR CÓDIGO
+do método recarregarComponente
+
+Passo 2
+
+No arquivo app-routing.module.ts, modifique o array de imports:
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
+  exports: [RouterModule]
+ })
+export class AppRoutingModule { }
+COPIAR CÓDIGO
+No exemplo acima, estamos usando a opção onSameUrlNavigation com o valor 
+'reload', o que fará com que o navegador recarregue a página quando a mesma 
+URL for navegada novamente.
+
+Passo 3
+
+Crie um novo arquivo, que será uma classe; você pode nomeá-la como preferir. 
+Neste exemplo, vou chamá-la de custom-reuse-estrategy.ts. Adicione o código 
+a seguir:
+
+import {ActivatedRouteSnapshot, BaseRouteReuseStrategy} from '@angular/router';
+
+export class CustomReuseStrategy extends BaseRouteReuseStrategy {
+
+  public override shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
+    return future.data['reuseComponent'];
+  }
+}
+COPIAR CÓDIGO
+O código apresentado define uma estratégia de reutilização de rotas personalizada 
+CustomReuseStrategy, que estende a classe BaseRouteReuseStrategy do módulo 
+@angular/router.
+
+O método shouldReuseRoute é responsável por determinar se a rota atual 
+pode ser reutilizada ou não.
+
+Neste caso, a implementação personalizada verifica se a rota futura possui 
+a propriedade reuseComponent definida no objeto data.
+
+Se a propriedade estiver definida como true, a rota pode ser reutilizada. 
+Caso contrário, a rota será tratada como uma nova rota e o componente 
+correspondente será criado novamente.
+
+Passo 4
+
+Agora você precisa registrar a sua estratégia personalizada no módulo 
+da sua aplicação, dentro do array de providers:
+
+No arquivo app-routing.module.ts:
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
+  exports: [RouterModule],
+  providers: [
+    {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
+  ],
+ })
+export class AppRoutingModule { }
+COPIAR CÓDIGO
+Passo 5
+
+Além disso, no arquivo app-routing.module.ts, na constante contendo as 
+rotas da aplicação, adicione a propriedade data nos componentes que terão 
+esse comportamento:
+
+{
+    path: 'listarPensamento',
+    component: ListarPensamentoComponent,
+    data: {
+      reuseComponent: true
+    }
+  },
+COPIAR CÓDIGO
+A propriedade data é um objeto que pode ser adicionado a uma rota específica 
+no arquivo de definição de rotas do Angular. Ele pode ser usado para armazenar 
+metadados personalizados associados a uma rota, que podem ser usados para 
+tomar decisões personalizadas ao navegar para uma rota específica.
+
+Passo 6
+
+Importe a classe RouteReuseStrategy e também a classe que você criou no 
+arquivo app-routing.module.ts
+
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomReuseStrategy } from './custom-reuse-strategy'
+COPIAR CÓDIGO
+Agora, teste a aplicação para conferir se está funcionando como antes.
+
+E bons estudos! :)
+
+-------------------------------//-------------------------------
+
+A necessidade de compartilhar informações e dados entre 
+componentes é muito comum nas aplicações. No exemplo do 
+projeto Memoteca, o componente de pensamento precisava 
+ter acesso à lista de pensamentos favoritos renderizada 
+no componente de listagem. Quais os passos necessários 
+para que a comunicação entre componentes possa acontecer, 
+no caso em que um componente filho precisa receber dados 
+do componente pai?
+
+No componente filho, é necessário decorar a propriedade 
+que se deseja receber os dados do componente pai com o 
+decorator @Input. No componente pai, fazemos um property 
+binding da propriedade decorada com a propriedade que 
+queremos associar.
+
+@Input é um decorator que marca um campo de classe como 
+uma propriedade de entrada e fornece metadados de configuração. 
+Isso fornece a um componente filho uma maneira de se comunicar 
+com seu componente pai, permitindo que um componente pai 
+atualize dados no componente filho.
 
 -------------------------------//-------------------------------
